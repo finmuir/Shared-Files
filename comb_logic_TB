@@ -1,0 +1,42 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity comb_logic_tb is
+end comb_logic_tb;
+
+architecture Behavioral of comb_logic_tb is
+    -- Declare the signals for the input and output ports of the DUT
+    signal V, W, X, Y, Z, OP : std_logic;
+    
+    -- Instantiate the DUT
+    component comb_logic
+        Port ( V : in STD_LOGIC;
+               W : in STD_LOGIC;
+               X : in STD_LOGIC;
+               Y : in STD_LOGIC;
+               Z : in STD_LOGIC;
+               OP : out STD_LOGIC);
+    end component;
+    
+begin
+    -- Connect the DUT ports to the signals
+    DUT: comb_logic port map (V, W, X, Y, Z, OP);
+    
+    -- Stimulus process to apply inputs to the DUT
+    stimulus: process
+    begin
+        -- Apply input values for 10 ns
+        V <= '1'; W <= '0'; X <= '1'; Y <= '0'; Z <= '1'; wait for 10 ns;
+        V <= '0'; W <= '1'; X <= '0'; Y <= '1'; Z <= '0'; wait for 10 ns;
+        V <= '1'; W <= '1'; X <= '0'; Y <= '1'; Z <= '0'; wait for 10 ns;
+        V <= '1'; W <= '0'; X <= '1'; Y <= '1'; Z <= '0'; wait for 10 ns;
+        V <= '0'; W <= '0'; X <= '1'; Y <= '1'; Z <= '1'; wait for 10 ns;
+        V <= '1'; W <= '0'; X <= '0'; Y <= '0'; Z <= '1'; wait for 10 ns;
+        V <= '0'; W <= '1'; X <= '1'; Y <= '0'; Z <= '0'; wait for 10 ns;
+        V <= '1'; W <= '1'; X <= '1'; Y <= '1'; Z <= '0'; wait for 10 ns;
+        V <= '0'; W <= '0'; X <= '0'; Y <= '0'; Z <= '0'; wait for 10 ns;
+        
+        -- Stop simulation
+        wait;
+    end process;
+end Behavioral;
